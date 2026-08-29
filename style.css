@@ -1,0 +1,943 @@
+/* =========================================================
+   QUR'AN LEARNING CENTER
+   HTML + CSS + JAVASCRIPT
+   ========================================================= */
+
+:root{
+    --primary:#176b4d;
+    --primary-dark:#0c4d36;
+    --secondary:#d9a441;
+    --bg:#f4f7f5;
+    --card:#ffffff;
+    --text:#18231f;
+    --muted:#718078;
+    --border:#e3ebe6;
+    --danger:#d9534f;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --radius:18px;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+    border:none;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+.login-screen{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(217,164,65,.18),transparent 30%),
+        radial-gradient(circle at 80% 80%,rgba(23,107,77,.25),transparent 35%),
+        linear-gradient(135deg,#062d21,#176b4d);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.login-box{
+    width:min(440px,100%);
+    background:rgba(255,255,255,.97);
+    border-radius:28px;
+    padding:38px;
+    box-shadow:0 30px 80px rgba(0,0,0,.3);
+    text-align:center;
+}
+
+.login-icon{
+    width:82px;
+    height:82px;
+    border-radius:50%;
+    margin:0 auto 20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:40px;
+    background:#e7f3ed;
+}
+
+.login-box h1{
+    color:var(--primary);
+    margin-bottom:8px;
+}
+
+.login-box p{
+    color:var(--muted);
+    margin-bottom:25px;
+}
+
+.login-box input{
+    width:100%;
+    padding:15px 17px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    outline:none;
+    margin-bottom:12px;
+    font-size:15px;
+}
+
+.login-box input:focus{
+    border-color:var(--primary);
+}
+
+.login-btn{
+    width:100%;
+    padding:15px;
+    border-radius:12px;
+    background:var(--primary);
+    color:white;
+    font-weight:700;
+    font-size:15px;
+}
+
+.login-btn:hover{
+    background:var(--primary-dark);
+}
+
+/* =========================================================
+   APP
+   ========================================================= */
+
+.app{
+    display:none;
+    min-height:100vh;
+}
+
+.app.active{
+    display:flex;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar{
+    width:260px;
+    background:#103f31;
+    color:white;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    padding:24px 16px;
+    z-index:1000;
+    overflow-y:auto;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 10px 25px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.logo-icon{
+    width:45px;
+    height:45px;
+    border-radius:13px;
+    background:#d9a441;
+    color:#15392d;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.logo h2{
+    font-size:16px;
+}
+
+.logo small{
+    opacity:.65;
+}
+
+.nav{
+    margin-top:25px;
+}
+
+.nav button{
+    width:100%;
+    background:transparent;
+    color:#dce9e4;
+    text-align:left;
+    padding:13px 14px;
+    border-radius:11px;
+    margin-bottom:6px;
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:rgba(255,255,255,.1);
+    color:white;
+}
+
+.sidebar-bottom{
+    position:absolute;
+    bottom:20px;
+    left:16px;
+    right:16px;
+}
+
+.logout-btn{
+    width:100%;
+    background:#d9534f;
+    color:white;
+    padding:12px;
+    border-radius:10px;
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.main{
+    margin-left:260px;
+    width:calc(100% - 260px);
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+    background:white;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+    position:sticky;
+    top:0;
+    z-index:900;
+}
+
+.menu-mobile{
+    display:none;
+    font-size:24px;
+    background:none;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#e5f1eb;
+    color:var(--primary);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+}
+
+.content{
+    padding:30px;
+    max-width:1500px;
+    margin:auto;
+}
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:30px;
+    margin-bottom:7px;
+}
+
+.page-title p{
+    color:var(--muted);
+}
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.hero{
+    background:
+        radial-gradient(circle at 80% 20%,rgba(217,164,65,.25),transparent 30%),
+        linear-gradient(135deg,#0d543c,#1b7656);
+    color:white;
+    border-radius:25px;
+    padding:35px;
+    margin-bottom:25px;
+    overflow:hidden;
+    position:relative;
+}
+
+.hero h1{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.hero p{
+    color:#d9ebe3;
+    max-width:650px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:11px 17px;
+    border-radius:10px;
+    font-weight:700;
+    background:var(--primary);
+    color:white;
+}
+
+.btn.gold{
+    background:var(--secondary);
+    color:#263d31;
+}
+
+.btn.light{
+    background:white;
+    color:var(--primary);
+}
+
+.btn.danger{
+    background:var(--danger);
+}
+
+.btn.secondary{
+    background:#edf3ef;
+    color:var(--text);
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:17px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:43px;
+    height:43px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#edf6f1;
+    font-size:20px;
+    margin-bottom:14px;
+}
+
+.stat-card h3{
+    font-size:27px;
+    margin-bottom:3px;
+}
+
+.stat-card p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.section-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:23px;
+    box-shadow:var(--shadow);
+    margin-bottom:20px;
+}
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+    gap:10px;
+}
+
+.section-header h2{
+    font-size:19px;
+}
+
+.progress-bar{
+    width:100%;
+    height:10px;
+    border-radius:20px;
+    background:#edf1ef;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:var(--primary);
+    transition:.4s;
+}
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.quick-card{
+    padding:18px;
+    background:#f8faf9;
+    border:1px solid var(--border);
+    border-radius:15px;
+    cursor:pointer;
+}
+
+.quick-card:hover{
+    border-color:var(--primary);
+}
+
+/* =========================================================
+   SURAH
+   ========================================================= */
+
+.search-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.search-input{
+    flex:1;
+    min-width:220px;
+    padding:14px 16px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    outline:none;
+    background:white;
+}
+
+.filter{
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:white;
+}
+
+.surah-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.surah-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:18px;
+    cursor:pointer;
+    transition:.2s;
+    position:relative;
+}
+
+.surah-card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow);
+    border-color:#b7d6c8;
+}
+
+.surah-number{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#edf5f1;
+    color:var(--primary);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.surah-card h3{
+    margin-bottom:4px;
+}
+
+.surah-arabic{
+    color:var(--primary);
+    font-size:23px;
+    direction:rtl;
+}
+
+.surah-info{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:8px;
+}
+
+.favorite-small{
+    position:absolute;
+    top:17px;
+    right:17px;
+    background:none;
+    font-size:19px;
+}
+
+/* =========================================================
+   READER
+   ========================================================= */
+
+.reader-header{
+    background:linear-gradient(135deg,#103f31,#1c7657);
+    color:white;
+    border-radius:22px;
+    padding:28px;
+    margin-bottom:18px;
+}
+
+.reader-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.reader-header h1{
+    font-size:30px;
+}
+
+.reader-header p{
+    opacity:.75;
+    margin-top:5px;
+}
+
+.reader-controls{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.ayah-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:27px;
+    margin-bottom:15px;
+    box-shadow:0 5px 18px rgba(0,0,0,.04);
+}
+
+.ayah-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.ayah-number{
+    width:37px;
+    height:37px;
+    border-radius:50%;
+    background:#edf5f1;
+    color:var(--primary);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:800;
+}
+
+.ayah-tools{
+    display:flex;
+    gap:7px;
+}
+
+.icon-btn{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:#f0f4f2;
+}
+
+.arabic{
+    font-family:"Amiri","Noto Naskh Arabic","Traditional Arabic",serif;
+    font-size:34px;
+    line-height:2.1;
+    direction:rtl;
+    text-align:right;
+    margin-bottom:18px;
+}
+
+.latin{
+    color:#6d7974;
+    line-height:1.8;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.translation{
+    font-size:16px;
+    line-height:1.8;
+}
+
+.reader-footer{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin:25px 0;
+}
+
+/* =========================================================
+   QUIZ
+   ========================================================= */
+
+.quiz-box{
+    max-width:800px;
+    margin:auto;
+}
+
+.quiz-progress{
+    margin-bottom:18px;
+}
+
+.question-card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+}
+
+.question-number{
+    color:var(--primary);
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.question-card h2{
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.options{
+    display:grid;
+    gap:12px;
+}
+
+.option{
+    padding:15px;
+    border:2px solid var(--border);
+    background:white;
+    border-radius:12px;
+    text-align:left;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:var(--primary);
+}
+
+.option.correct{
+    border-color:#28a745;
+    background:#eaf8ee;
+}
+
+.option.wrong{
+    border-color:#dc3545;
+    background:#fff0f0;
+}
+
+.quiz-result{
+    text-align:center;
+    background:white;
+    border-radius:20px;
+    padding:40px;
+    border:1px solid var(--border);
+}
+
+.score-big{
+    font-size:65px;
+    color:var(--primary);
+    font-weight:900;
+}
+
+/* =========================================================
+   FAVORITES
+   ========================================================= */
+
+.empty{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--muted);
+}
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+.settings-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.setting-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+}
+
+.setting-card h3{
+    margin-bottom:8px;
+}
+
+.setting-card p{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:16px;
+}
+
+.range{
+    width:100%;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:5000;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.modal-box{
+    background:white;
+    width:min(700px,100%);
+    max-height:85vh;
+    overflow:auto;
+    border-radius:22px;
+    padding:28px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:#edf2ef;
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#102e24;
+    color:white;
+    padding:14px 18px;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:9999;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+body.dark{
+    --bg:#101715;
+    --card:#17211e;
+    --text:#edf5f1;
+    --muted:#9aaba4;
+    --border:#283732;
+}
+
+body.dark .topbar,
+body.dark .section-card,
+body.dark .stat-card,
+body.dark .surah-card,
+body.dark .ayah-card,
+body.dark .question-card,
+body.dark .quiz-result,
+body.dark .setting-card,
+body.dark .modal-box{
+    background:#17211e;
+}
+
+body.dark .search-input,
+body.dark .filter,
+body.dark .option,
+body.dark .quick-card{
+    background:#17211e;
+    color:var(--text);
+}
+
+body.dark .topbar{
+    border-color:var(--border);
+}
+
+body.dark .secondary,
+body.dark .icon-btn{
+    background:#25322d;
+    color:white;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:1100px){
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .surah-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .quick-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:800px){
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.3s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .menu-mobile{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .content{
+        padding:18px;
+    }
+
+    .surah-grid{
+        grid-template-columns:1fr;
+    }
+
+    .settings-grid{
+        grid-template-columns:1fr;
+    }
+
+    .arabic{
+        font-size:27px;
+    }
+
+    .hero h1{
+        font-size:26px;
+    }
+}
+
+@media(max-width:550px){
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .login-box{
+        padding:25px;
+    }
+
+    .reader-footer{
+        flex-direction:column;
+    }
+}

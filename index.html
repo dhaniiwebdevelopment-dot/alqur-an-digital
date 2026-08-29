@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al-Qur`an Digital</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen" class="login-screen">
+    <div class="login-box">
+        <div class="login-icon"><i class='bx bx-book-open'></i></div>
+        <h1>Qur'an Learning</h1>
+        <p>Belajar, membaca, menghafal dan memahami Al-Qur'an secara digital</p>
+        <input type="text" id="loginName" placeholder="Masukkan nama kamu" autocomplete="off">
+        <button class="login-btn" onclick="login()">Masuk ke Aplikasi</button>
+    </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="app">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+        <div class="logo">
+            <div class="logo-icon"><i class='bx bx-book-open'></i></div>
+            <div><h2>Qur'an Center</h2><small>Learning Platform</small></div>
+        </div>
+        <nav class="nav">
+            <button class="active" onclick="showPage('dashboard',this)"><i class='bx bx-home'></i> Dashboard</button>
+            <button onclick="showPage('surah',this)"><i class='bx bx-book-alt'></i> Daftar Surat</button>
+            <button onclick="showPage('reader',this)"><i class='bx bx-book-open'></i> Baca Al-Qur'an</button>
+            <button onclick="showPage('quiz',this)"><i class='bx bx-brain'></i> Kuis</button>
+            <button onclick="showPage('favorites',this)"><i class='bx bx-star'></i> Favorit</button>
+            <button onclick="showPage('progress',this)"><i class='bx bx-bar-chart-alt-2'></i> Progress</button>
+            <button onclick="showPage('settings',this)"><i class='bx bx-cog'></i> Pengaturan</button>
+        </nav>
+        <div class="sidebar-bottom">
+            <button class="logout-btn" onclick="logout()"><i class='bx bx-log-out'></i> Keluar</button>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+        <header class="topbar">
+            <button class="menu-mobile" onclick="toggleSidebar()"><i class='bx bx-menu'></i></button>
+            <div><strong id="welcomeName">Assalamu'alaikum</strong></div>
+            <div class="profile"><div class="avatar" id="avatar">D</div></div>
+        </header>
+
+        <div class="content">
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="page active">
+                <div class="hero">
+                    <h1>Assalamu'alaikum, <span id="heroName">Teman</span> <i class='bx bx-hand-wave'></i></h1>
+                    <p>Selamat datang di Qur'an Learning Center, Mari membaca dan mempelajari Al-Qur'an sedikit demi sedikit setiap hari.</p>
+                    <div class="hero-actions">
+                        <button class="btn gold" onclick="openRandomSurah()"><i class='bx bx-book-open'></i> Mulai Membaca</button>
+                        <button class="btn light" onclick="startQuiz()"><i class='bx bx-brain'></i> Mulai Kuis</button>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-icon"><i class='bx bx-book-alt'></i></div><h3 id="statSurah">0</h3><p>Surat Dibaca</p></div>
+                    <div class="stat-card"><div class="stat-icon"><i class='bx bx-star'></i></div><h3 id="statFavorite">0</h3><p>Surat Favorit</p></div>
+                    <div class="stat-card"><div class="stat-icon"><i class='bx bx-brain'></i></div><h3 id="statQuiz">0</h3><p>Kuis Diselesaikan</p></div>
+                    <div class="stat-card"><div class="stat-icon"><i class='bx bx-trophy'></i></div><h3 id="statScore">0</h3><p>Skor Kuis Terbaik</p></div>
+                </div>
+                <div class="section-card">
+                    <div class="section-header"><h2><i class='bx bx-bar-chart-alt-2'></i> Progress Membaca</h2><strong id="progressText">0%</strong></div>
+                    <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+                </div>
+                <div class="section-card">
+                    <div class="section-header"><h2>Menu Cepat</h2></div>
+                    <div class="quick-grid">
+                        <div class="quick-card" onclick="showPageByName('surah')"><i class='bx bx-book-alt'></i><h3>Semua Surat</h3><p>Jelajahi 114 surat Al-Qur'an</p></div>
+                        <div class="quick-card" onclick="startQuiz()"><i class='bx bx-brain'></i><h3>Latihan Kuis</h3><p>Uji pengetahuanmu tentang Al-Qur'an</p></div>
+                        <div class="quick-card" onclick="showPageByName('favorites')"><i class='bx bx-star'></i><h3>Surat Favorit</h3><p>Buka surat yang sudah kamu simpan</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SURAH -->
+            <section id="surah" class="page">
+                <div class="page-title"><h1><i class='bx bx-book-alt'></i> Daftar Surat</h1><p>Pilih surat yang ingin kamu baca</p></div>
+                <div class="search-row">
+                    <div class="search-wrapper"><i class='bx bx-search search-icon'></i><input id="searchSurah" class="search-input" placeholder="Cari nama surat..." oninput="filterSurah()"></div>
+                    <select id="revelationFilter" class="filter" onchange="filterSurah()">
+                        <option value="all">Semua</option><option value="Mekah">Mekah</option><option value="Madinah">Madinah</option>
+                    </select>
+                </div>
+                <div id="surahGrid" class="surah-grid"><div class="empty"><i class='bx bx-loader-alt bx-spin'></i> Memuat daftar surat...</div></div>
+            </section>
+
+            <!-- READER -->
+            <section id="reader" class="page">
+                <div id="readerContent"><div class="empty"><i class='bx bx-book-open'></i> Pilih surat terlebih dahulu</div></div>
+            </section>
+
+            <!-- QUIZ -->
+            <section id="quiz" class="page">
+                <div class="page-title"><h1><i class='bx bx-brain'></i> Kuis Al-Qur'an</h1><p>Uji pengetahuanmu dengan soal acak</p></div>
+                <div id="quizContainer" class="quiz-box">
+                    <div class="quiz-result">
+                        <div style="font-size:55px"><i class='bx bx-brain'></i></div>
+                        <h2>Kuis Al-Qur'an</h2>
+                        <p style="color:var(--muted);margin:10px 0 20px">Terdapat 10 soal acak</p>
+                        <button class="btn" onclick="startQuiz()">Mulai Kuis</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAVORITES -->
+            <section id="favorites" class="page">
+                <div class="page-title"><h1><i class='bx bx-star'></i> Surat Favorit</h1><p>Koleksi surat yang kamu simpan</p></div>
+                <div id="favoriteGrid" class="surah-grid"></div>
+            </section>
+
+            <!-- PROGRESS -->
+            <section id="progress" class="page">
+                <div class="page-title"><h1><i class='bx bx-bar-chart-alt-2'></i> Progress Belajar</h1><p>Pantau perkembangan belajarmu</p></div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-icon"><i class='bx bx-book-open'></i></div><h3 id="progressSurah">0</h3><p>Surat Dibaca</p></div>
+                    <div class="stat-card"><div class="stat-icon"><i class='bx bx-star'></i></div><h3 id="progressFav">0</h3><p>Favorit</p></div>
+                    <div class="stat-card"><div class="stat-icon"><i class='bx bx-brain'></i></div><h3 id="progressQuiz">0</h3><p>Kuis</p></div>
+                    <div class="stat-card"><div class="stat-icon"><i class='bx bx-trophy'></i></div><h3 id="progressBest">0</h3><p>Skor Terbaik</p></div>
+                </div>
+                <div class="section-card">
+                    <div class="section-header"><h2>Kemajuan Membaca</h2><strong id="progressBig">0%</strong></div>
+                    <div class="progress-bar"><div id="progressBigFill" class="progress-fill"></div></div>
+                    <p id="progressDescription" style="color:var(--muted);margin-top:15px">Belum ada surat yang selesai dibaca</p>
+                </div>
+                <div class="section-card">
+                    <h2 style="margin-bottom:15px"><i class='bx bx-scroll'></i> Surat yang Sudah Dibaca</h2>
+                    <div id="readList"></div>
+                </div>
+            </section>
+
+            <!-- SETTINGS -->
+            <section id="settings" class="page">
+                <div class="page-title"><h1><i class='bx bx-cog'></i> Pengaturan</h1><p>Sesuaikan pengalaman belajar Al-Qur'an</p></div>
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <h3><i class='bx bx-user'></i> Nama Pengguna</h3>
+                        <p>Nama yang ditampilkan pada dashboard</p>
+                        <input id="settingsName" class="search-input" style="width:100%">
+                        <button class="btn" style="margin-top:10px" onclick="saveName()">Simpan Nama</button>
+                    </div>
+                    <div class="setting-card">
+                        <h3><i class='bx bx-moon'></i> Tema</h3>
+                        <p>Aktifkan mode gelap</p>
+                        <button class="btn" onclick="toggleDarkMode()">Ubah Tema</button>
+                    </div>
+                    <div class="setting-card">
+                        <h3><i class='bx bx-font'></i> Ukuran Tulisan Arab</h3>
+                        <p>Atur ukuran teks ayat</p>
+                        <input id="fontRange" class="range" type="range" min="24" max="50" value="34" oninput="changeFontSize(this.value)">
+                        <div style="margin-top:10px">Ukuran: <strong id="fontValue">34px</strong></div>
+                    </div>
+                    <div class="setting-card">
+                        <h3><i class='bx bx-trash'></i> Reset Data</h3>
+                        <p>Menghapus progress, favorit dan hasil kuis</p>
+                        <button class="btn danger" onclick="resetData()">Reset Semua Data</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal hidden">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2 id="modalTitle">Informasi</h2>
+            <button class="close" onclick="closeModal()"><i class='bx bx-x'></i></button>
+        </div>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast">Berhasil!</div>
+
+<script src="script.js"></script>
+</body>
+</html>
