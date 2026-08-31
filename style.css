@@ -76,16 +76,21 @@ button{
     text-align:center;
 }
 
-.login-icon{
-    width:82px;
-    height:82px;
-    border-radius:50%;
-    margin:0 auto 20px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:40px;
-    background:#e7f3ed;
+.logo-login {
+    width: 68px;
+    height: 68px;
+    background: #e0a83d;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 15px;
+}
+
+.logo-login i {
+    font-size: 32px;
 }
 
 .login-box h1{
